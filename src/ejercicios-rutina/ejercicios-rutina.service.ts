@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EjerciciosRutina } from './entities/ejercicios-rutina.entity';
-import { CreateEjerciciosRutinaDto } from './dto/create-ejercicios-rutina.dto';
-import { UpdateEjerciciosRutinaDto } from './dto/update-ejercicios-rutina.dto';
+import { EjerciciosRutina } from './entities/ejercicio-rutina.entity';
+import { CreateEjerciciosRutinaDto } from './dto/create-ejercicio-rutina.dto';
+import { UpdateEjerciciosRutinaDto } from './dto/update-ejercicio-rutina.dto';
 
 @Injectable()
 export class EjerciciosRutinaService {
@@ -28,7 +28,11 @@ export class EjerciciosRutinaService {
     });
   }
 
-  update(id_rutina: number, id_ejercicio: number, dto: UpdateEjerciciosRutinaDto) {
+  update(
+    id_rutina: number,
+    id_ejercicio: number,
+    dto: UpdateEjerciciosRutinaDto,
+  ) {
     return this.repo.update({ id_rutina, id_ejercicio }, dto);
   }
 

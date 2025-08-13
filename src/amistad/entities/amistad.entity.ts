@@ -8,7 +8,7 @@ export class Amistad {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Usuario, (usuario) => usuario.id, { onDelete: 'CASCADE' })
   solicitante: Usuario;
 
   // eslint-disable-next-line prettier/prettier

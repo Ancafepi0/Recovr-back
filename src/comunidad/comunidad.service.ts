@@ -16,8 +16,13 @@ export class ComunidadService {
   ) {}
 
   async create(createComunidadDto: CreateComunidadDto) {
-    const usuario = await this.usuarioRepository.findOneBy({ id: createComunidadDto.id_usuario });
+    const usuario = await this.usuarioRepository.findOneBy({
+      id: createComunidadDto.id_usuario,
+    });
 
+    if (!usuario) {
+      throw new Error('Solicitante o amigo no encontrado');
+    }
     const comunidad = this.comunidadRepository.create({
       creador: usuario,
       nombre: createComunidadDto.nombre,
@@ -27,7 +32,9 @@ export class ComunidadService {
   }
 
   findAll() {
-    return this.comunidadRepository.find({ relations: ['creador', 'miembros'] });
+    return this.comunidadRepository.find({
+      relations: ['creador', 'miembros'],
+    });
   }
 
   findOne(id: number) {

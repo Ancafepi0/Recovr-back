@@ -16,12 +16,20 @@ export class AmistadService {
   ) {}
 
   async create(createAmistadDto: CreateAmistadDto) {
-    const solicitante = await this.usuarioRepository.findOneBy({ id: createAmistadDto.solicitanteId });
-    const amigo = await this.usuarioRepository.findOneBy({ id: createAmistadDto.amigoId });
+    const solicitante = await this.usuarioRepository.findOneBy({
+      id_Usuario: createAmistadDto.solicitanteId,
+    });
+    const amigo = await this.usuarioRepository.findOneBy({
+      id_Usuario: createAmistadDto.amigoId,
+    });
+
+    if (!solicitante || !amigo) {
+      throw new Error('Solicitante o amigo no encontrado');
+    }
 
     const amistad = this.amistadRepository.create({
-      solicitante,
-      amigo,
+      solicitante: solicitante,
+      amigo: amigo,
       estado: createAmistadDto.estado || 'pendiente',
     });
 

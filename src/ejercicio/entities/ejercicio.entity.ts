@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { MiembroEjercicio } from '../../miembro-ejercicio/entities/miembro-ejercicio.entity';
-import { EjerciciosRutina } from '../../ejercicios-rutina/entities/ejercicios-rutina.entity';
+import { EjerciciosRutina } from '../../ejercicios-rutina/entities/ejercicio-rutina.entity';
 
 @Entity('ejercicio')
 export class Ejercicio {
@@ -22,9 +22,9 @@ export class Ejercicio {
   @Column({ type: 'varchar', length: 50 })
   tipo: string;
 
-  @OneToMany(() => MiembroEjercicio, me => me.ejercicio)
+  @OneToMany(() => MiembroEjercicio, (me) => me.ejercicio)
   miembroEjercicios: MiembroEjercicio[];
 
-  @OneToMany(() => EjerciciosRutina, er => er.ejercicio)
+  @OneToMany(() => EjerciciosRutina, (er) => er.ejercicio)
   ejerciciosRutina: EjerciciosRutina[];
 }

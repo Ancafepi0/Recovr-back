@@ -16,8 +16,13 @@ export class CuerpoService {
   ) {}
 
   async create(createCuerpoDto: CreateCuerpoDto) {
-    const usuario = await this.usuarioRepository.findOneBy({ id_usuario: createCuerpoDto.id_usuario });
+    const usuario = await this.usuarioRepository.findOneBy({
+      id_Usuario: createCuerpoDto.id_usuario,
+    });
 
+    if (!usuario) {
+      throw new Error('Usuario no encontrado');
+    }
     const cuerpo = this.cuerpoRepository.create({
       usuario,
     });
@@ -26,7 +31,9 @@ export class CuerpoService {
   }
 
   findAll() {
-    return this.cuerpoRepository.find({ relations: ['usuario', 'miembrosCuerpo'] });
+    return this.cuerpoRepository.find({
+      relations: ['usuario', 'miembrosCuerpo'],
+    });
   }
 
   findOne(id: number) {

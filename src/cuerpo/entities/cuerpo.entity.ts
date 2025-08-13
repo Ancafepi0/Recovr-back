@@ -8,9 +8,11 @@ export class Cuerpo {
   @PrimaryGeneratedColumn()
   id_cuerpo: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.cuerpos, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Cuerpo, (cuerpo) => cuerpo, {
+    onDelete: 'CASCADE',
+  })
   usuario: Usuario;
 
-  @OneToMany(() => MiembroCuerpo, miembroCuerpo => miembroCuerpo.cuerpo)
+  @OneToMany(() => MiembroCuerpo, (miembroCuerpo) => miembroCuerpo.cuerpo)
   miembrosCuerpo: MiembroCuerpo[];
 }
